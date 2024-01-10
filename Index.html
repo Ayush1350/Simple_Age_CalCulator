@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    <h1>Age Calculator</h1>
+    <label>Enter Your Birthdate: </label><input type="date" id="birthdate"><br><br>
+    <button onclick="calculateAge()">Calculate</button>
+
+    <p> Result: 
+        <span id="years"></span> years, 
+        <span id="months"></span> months, 
+        <span id="days"></span> days, 
+        <span id="hours"></span> hours, 
+        <span id="seconds"></span> seconds
+    </p>
+
+    <script>
+        function calculateAge() {
+            var birthdate = document.getElementById("birthdate").value;
+            var today = new Date();
+            var birthdateObj = new Date(birthdate);
+
+            var ageMilliseconds = today - birthdateObj;
+
+            var years = Math.floor(ageMilliseconds / (365.25 * 24 * 60 * 60 * 1000));
+            var remainingMilliseconds = ageMilliseconds % (365.25 * 24 * 60 * 60 * 1000);
+
+            var months = Math.floor(remainingMilliseconds / (30.44 * 24 * 60 * 60 * 1000));
+            remainingMilliseconds %= (30.44 * 24 * 60 * 60 * 1000);
+
+            var days = Math.floor(remainingMilliseconds / (24 * 60 * 60 * 1000));
+            remainingMilliseconds %= (24 * 60 * 60 * 1000);
+
+            var hours = Math.floor(remainingMilliseconds / (60 * 60 * 1000));
+            remainingMilliseconds %= (60 * 60 * 1000);
+
+            var seconds = Math.floor(remainingMilliseconds / (1000));
+
+            document.getElementById("years").innerHTML = years;
+            document.getElementById("months").innerHTML = months;
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("seconds").innerHTML = seconds;
+        }
+    </script>
+</body>
+</html>
